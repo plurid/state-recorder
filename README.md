@@ -44,6 +44,7 @@ or
 
     stateRecorder.add(newState);
 
+
     stateRecorder.all();
     // returns an array of all the state objects
     // e.g.
@@ -51,6 +52,7 @@ or
     //      initialState,
     //      newState
     // ];
+
 
     stateRecorder.current();
     // returns the current StateSituation
@@ -62,16 +64,19 @@ or
     //      last, // if it is the last state
     // };
 
+
     stateRecorder.previous();
     // returns the previous StateSituation, if it exists,
     // or the first StateSituation;
     // sets playMode on
+
 
     stateRecorder.next();
     // returns the next StateSituation, if it exists,
     // or the last StateSituation;
     // sets playMode on
     // or sets playMode off if it returns the last StateSituation
+
 
     const differences = stateRecorder.differences();
     // returns an array of differences between the states
