@@ -89,10 +89,10 @@ or
 
     // during playMode new states cannot/will not be added onto the state chain with the add() method
 
-    // to set playMode off:
-    // 1. the cursor must be placed on the last state of the state chain through succesive next() methods
-    // 2. the stateRecorder must be resetted
+    // any of the following will set playMode off:
+    // - the cursor is placed on the last state of the state chain through successive next() methods
+    // - the stateRecorder is resetted
     stateRecorder.reset();
-    // 3. the stateRecorder can be branched
+    // - the stateRecorder is branched
     stateRecorder.branch();
     //    effectively discarding all the states on the state chain from the current position of the state cursor
