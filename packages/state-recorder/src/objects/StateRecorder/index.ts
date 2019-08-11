@@ -107,7 +107,8 @@ class StateRecorder implements IStateRecorder {
 
     /**
      * Get an array of state differences to be stored
-     * in a persistent storage system.
+     * in a persistent storage system and loaded at a later date
+     * in a new StateRecorder.
      *
      * @returns StateDifference[]
      */
