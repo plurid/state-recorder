@@ -1,7 +1,7 @@
 import StateRecorder from './';
 
 
-describe.only('StateRecorde', () => {
+describe('StateRecorder', () => {
     it('create state phases', () => {
         const state1 = {
             action1: 'foo',
