@@ -40,13 +40,17 @@ or
 
     const newState = {
         // updated application state object
-    }
+    };
 
     stateRecorder.add(newState);
 
     stateRecorder.all();
     // returns an array of all the state objects
-    // e.g. [initialState, newState];
+    // e.g.
+    // [
+    //      initialState,
+    //      newState
+    // ];
 
     stateRecorder.current();
     // returns a StateSituation
@@ -56,7 +60,7 @@ or
     //      cursor, // the state location in all the recorded states
     //      first, // if it is the first state
     //      last, // if it is the last state
-    // }
+    // };
 
     stateRecorder.previous();
     // returns the previous StateSituation
