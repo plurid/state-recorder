@@ -50,7 +50,7 @@ class StateRecorder implements IStateRecorder {
     public add(state: State): number {
         if (!this.playMode) {
             const previousState = this.composeState(this.stateDifferences.length - 1);
-            const differenceEngine = new StateDifferenceEngine(previousState, state);
+            const differenceEngine = new StateDifferenceEngine({...previousState}, {...state});
             const difference = differenceEngine.difference();
             this.stateDifferences.push(difference);
             this.stateCursor = this.stateDifferences.length - 1;
