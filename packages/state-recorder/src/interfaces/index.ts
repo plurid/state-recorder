@@ -2,6 +2,10 @@ export interface State {
     [key: string]: any;
 }
 
+export interface StateDifference {
+    [key: string]: any;
+}
+
 
 export interface StateSituation {
     state: State;
@@ -17,4 +21,9 @@ export interface IStateRecorder {
     addState: (state: State) => number;
     previousState: () => StateSituation;
     nextState: () => StateSituation;
+}
+
+
+export interface IStateDifferenceEngine {
+    difference: () => StateDifference;
 }

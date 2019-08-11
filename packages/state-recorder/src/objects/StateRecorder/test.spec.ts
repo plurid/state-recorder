@@ -1,12 +1,13 @@
 import StateRecorder from './';
 
 
+
 describe('StateRecorder', () => {
-    it('create state phases', () => {
+    it('creates state phases', () => {
         const state1 = {
             action1: 'foo',
             action2: 'bar',
-        }
+        };
         const stateRecorder = new StateRecorder(state1);
         const states1 = stateRecorder.getStates();
         expect(states1).toStrictEqual([state1]);
@@ -14,7 +15,7 @@ describe('StateRecorder', () => {
         const state2 = {
             action1: 'baz',
             action2: 'boo',
-        }
+        };
         stateRecorder.addState(state2);
         const states2 = stateRecorder.getStates();
         expect(states2).toStrictEqual([state1, state2]);
@@ -22,7 +23,7 @@ describe('StateRecorder', () => {
         const state3 = {
             action1: 'bag',
             action2: 'bol',
-        }
+        };
         stateRecorder.addState(state3);
 
         const states3 = stateRecorder.getStates();
@@ -45,5 +46,17 @@ describe('StateRecorder', () => {
 
         const nextState1 = stateRecorder.nextState();
         expect(nextState1.state).toStrictEqual(state2);
+    });
+
+    it('handles only the state differences', () => {
+        const state1 = {
+            action1: 'foo',
+            action2: 'bar',
+        };
+
+        const state2 = {
+            action1: 'foo',
+            action2: 'baz',
+        };
     });
 });
