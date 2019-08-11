@@ -63,10 +63,12 @@ or
     // };
 
     stateRecorder.previous();
-    // returns the previous StateSituation
+    // returns the previous StateSituation, if it exists,
+    // or the first StateSituation
 
     stateRecorder.next();
-    // returns the next StateSituation
+    // returns the next StateSituation, if it exists,
+    // or the last StateSituation
 
     const differences = stateRecorder.differences();
     // returns an array of differences between the states
