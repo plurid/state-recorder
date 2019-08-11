@@ -78,3 +78,18 @@ or
     // the differences can be loaded into a new StateRecorder
     // to obtain a previous state chain, a sitting
     const previousSitting = new StateRecorder(differences);
+
+
+    // when the stateRecorder state cursor is not on the last state of the state chain
+    // due to an action of moving back/forward on the chain through previous()/next() methods
+    // a playMode is automatically activated
+
+    // during the playMode new states cannot/will not be added onto the state chain with the add() method
+
+    // to exit playMode:
+    // 1. the cursor must be placed on the last state of the state chain through succesive next() methods
+    // 2. the stateRecorder must be resetted
+    stateRecorder.reset();
+    // 3. the stateRecorder can be branched
+    stateRecorder.branch();
+    //    effectively discarding all the states on the state chain from the current position of the state cursor
