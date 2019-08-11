@@ -41,7 +41,7 @@ describe('StateDifferenceEngine', () => {
         expect(stateDiffEngine.difference()).toStrictEqual(stateDifference);
     });
 
-    xit('handles the state differences of arrays', () => {
+    it('handles the state differences of arrays', () => {
         const state1 = {
             action1: [1, 2, 3],
             action2: [2, 3, 4],
