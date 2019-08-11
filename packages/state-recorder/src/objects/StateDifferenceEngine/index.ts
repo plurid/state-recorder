@@ -4,6 +4,10 @@ import {
     StateDifference,
 } from '../../interfaces';
 
+import {
+    isEqual
+} from '../../utilities';
+
 
 
 class StateDifferenceEngine implements IStateDifferenceEngine {
@@ -24,12 +28,17 @@ class StateDifferenceEngine implements IStateDifferenceEngine {
         const stateDifference: any = {};
 
         for (const key in this.previousState) {
-            if (typeof this.previousState[key] !== 'object') {
-                if (this.previousState[key] !== this.currentState[key]) {
-                    stateDifference[key] = this.currentState[key];
+            const previousItem = this.previousState[key];
+            const currentItem = this.currentState[key];
+
+            if (typeof previousItem !== 'object') {
+                if (previousItem !== currentItem) {
+                    stateDifference[key] = currentItem;
                 }
             } else {
-                // handle arrays, objects
+                if (!isEqual(previousItem, currentItem)) {
+                    stateDifference[key] = currentItem;
+                }
             }
         }
 
