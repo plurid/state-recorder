@@ -59,4 +59,23 @@ describe('StateDifferenceEngine', () => {
         };
         expect(stateDiffEngine.difference()).toStrictEqual(stateDifference);
     });
+
+    it('handles the state differences of objects', () => {
+        const state1 = {
+            action1: {foo: 'bar', baz: 'boo'},
+            action2: {fod: 'bax', bay: 'bod'},
+        };
+
+        const state2 = {
+            action1: {foo: 'bar', baz: 'boo'},
+            action2: {fod: 'bom', bay: 'bal'},
+        };
+
+        const stateDiffEngine = new StateDifferenceEngine(state1, state2);
+
+        const stateDifference = {
+            action2: {fod: 'bom', bay: 'bal'},
+        };
+        expect(stateDiffEngine.difference()).toStrictEqual(stateDifference);
+    });
 });
