@@ -16,11 +16,12 @@ export interface StateSituation {
 
 
 export interface IStateRecorder {
-    getStates: () => State[];
-    getCurrentState: () => State;
-    addState: (state: State) => number;
-    previousState: () => StateSituation;
-    nextState: () => StateSituation;
+    all: () => State[];
+    current: () => State;
+    add: (state: State) => number;
+    previous: () => StateSituation;
+    next: () => StateSituation;
+    differences: () => StateDifference[];
 }
 
 
