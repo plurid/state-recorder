@@ -1,7 +1,7 @@
 {
     "name": "@plurid/state-recorder",
     "version": "0.0.1",
-    "description": "",
+    "description": "Record the state of an application and play it back/forward.",
     "keywords": [
         "state",
         "recorder"
