@@ -1,6 +1,6 @@
 import {
-    State,
     IStateRecorder,
+    State,
     StateSituation,
 } from '../../interfaces';
 
