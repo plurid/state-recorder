@@ -29,6 +29,10 @@ class StateRecorder implements IStateRecorder {
     }
 
     public addState(state: State): number {
+        // instead of storing the states as is
+        // to store only the differences between the current, new state
+        // and the old state
+
         this.states.push(state);
         this.stateCursor = this.states.length - 1;
 
