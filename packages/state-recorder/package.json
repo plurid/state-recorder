@@ -43,6 +43,12 @@
             "tsx",
             "js"
         ],
+        "modulePathIgnorePatterns": [
+            "/node_modules/",
+            "/coverage/",
+            "/dist/",
+            "/docs/"
+        ],
         "coveragePathIgnorePatterns": [
             "/node_modules/",
             "/coverage/",
