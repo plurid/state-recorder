@@ -52,7 +52,7 @@ describe('StateRecorder', () => {
         expect(differences.length).toBe(3);
     });
 
-    it('can be instantiated without data', () => {
+    it('can be instantiated with empty object', () => {
         const state1 = {
         };
         const stateRecorder = new StateRecorder(state1);
@@ -96,5 +96,11 @@ describe('StateRecorder', () => {
 
         const differences = stateRecorder.differences();
         expect(differences.length).toBe(3);
+    });
+
+    it('can be instantiated without initial state', () => {
+        const stateRecorder = new StateRecorder({});
+        const states1 = stateRecorder.all();
+        expect(states1).toStrictEqual([{}]);
     });
 });

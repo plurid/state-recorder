@@ -14,7 +14,7 @@ class StateRecorder implements IStateRecorder {
     private stateDifferences: any[] = [];
     private stateCursor: number = 0;
 
-    constructor(state: State | any[] | undefined) {
+    constructor(state?: State | any[] | {}) {
         if (!Array.isArray(state)) {
             this.initialState = state || {};
             this.stateDifferences.push(this.initialState);
