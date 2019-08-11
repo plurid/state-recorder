@@ -8,7 +8,7 @@ import {
 
 class StateRecorder implements IStateRecorder {
     private states: State[] = [];
-    private stateIndex: number = 0;
+    private stateCursor: number = 0;
 
     constructor(state: State) {
         this.states.push(state);
@@ -19,57 +19,57 @@ class StateRecorder implements IStateRecorder {
     }
 
     public getCurrentState(): StateSituation {
-        const index = this.stateIndex;
+        const cursor = this.stateCursor;
         return {
-            state: this.states[index],
-            index,
-            first: index === 0,
-            last: index === this.states.length - 1,
+            state: this.states[cursor],
+            cursor,
+            first: cursor === 0,
+            last: cursor === this.states.length - 1,
         };
     }
 
     public addState(state: State): number {
         this.states.push(state);
-        this.stateIndex = this.states.length - 1;
+        this.stateCursor = this.states.length - 1;
 
-        return this.stateIndex;
+        return this.stateCursor;
     }
 
     public previousState(): StateSituation {
-        this.decreaseStateIndex();
-        const index = this.stateIndex;
+        this.decreasestateCursor();
+        const cursor = this.stateCursor;
         return {
-            state: this.states[index],
-            index,
-            first: index === 0,
-            last: index === this.states.length - 1,
+            state: this.states[cursor],
+            cursor,
+            first: cursor === 0,
+            last: cursor === this.states.length - 1,
         };
     }
 
     public nextState(): StateSituation {
-        this.increaseStateIndex();
-        const index = this.stateIndex;
+        this.increasestateCursor();
+        const cursor = this.stateCursor;
         return {
-            state: this.states[index],
-            index,
-            first: index === 0,
-            last: index === this.states.length - 1,
+            state: this.states[cursor],
+            cursor,
+            first: cursor === 0,
+            last: cursor === this.states.length - 1,
         };
     }
 
-    private decreaseStateIndex() {
-        if (this.stateIndex - 1 >= 0) {
-            this.stateIndex -= 1;
+    private decreasestateCursor() {
+        if (this.stateCursor - 1 >= 0) {
+            this.stateCursor -= 1;
         } else {
-            this.stateIndex = 0;
+            this.stateCursor = 0;
         }
     }
 
-    private increaseStateIndex() {
-        if (this.stateIndex + 1 <= this.states.length - 1) {
-            this.stateIndex += 1;
+    private increasestateCursor() {
+        if (this.stateCursor + 1 <= this.states.length - 1) {
+            this.stateCursor += 1;
         } else {
-            this.stateIndex = this.states.length - 1;
+            this.stateCursor = this.states.length - 1;
         }
     }
 }

@@ -5,7 +5,7 @@ export interface State {
 
 export interface StateSituation {
     state: State;
-    index: number;
+    cursor: number;
     first: boolean;
     last: boolean;
 }
