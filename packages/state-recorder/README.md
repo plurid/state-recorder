@@ -1,8 +1,11 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/plurid/state-recorder/master/about/identity/state-recorder-logo.png" height="200px">
     <br />
+    <a target="_blank" href="https://www.npmjs.com/package/@plurid/state-recorder">
+        <img src="https://img.shields.io/npm/v/@plurid/state-recorder.svg?logo=npm&colorB=940c0c&style=for-the-badge" alt="Version">
+    </a>
     <a href="https://github.com/plurid/state-recorder/blob/master/LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-blue.svg?colorB=492356&style=for-the-badge" alt="License">
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg?colorB=940c0c&style=for-the-badge" alt="License">
     </a>
 </p>
 
@@ -13,7 +16,7 @@
 </h1>
 
 
-Record the state of an application and play it back/forward
+Record the state of an application and play it back/forward.
 
 
 ## Install
@@ -26,7 +29,6 @@ or
 
 
 ## Usage
-
 
     import StateRecorder from '@plurid/state-recorder';
 
