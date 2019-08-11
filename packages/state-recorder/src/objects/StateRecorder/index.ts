@@ -14,10 +14,10 @@ class StateRecorder implements IStateRecorder {
     private stateDifferences: any[] = [];
     private stateCursor: number = 0;
 
-    constructor(state: State | any[]) {
+    constructor(state: State | any[] | undefined) {
         if (!Array.isArray(state)) {
-            this.initialState = state;
-            this.stateDifferences.push(state);
+            this.initialState = state || {};
+            this.stateDifferences.push(this.initialState);
         } else {
             this.initialState = state[0];
             this.stateDifferences = state;
@@ -25,6 +25,11 @@ class StateRecorder implements IStateRecorder {
         }
     }
 
+    /**
+     * Get all the State objects
+     *
+     * @returns State[]
+     */
     public all(): State[] {
         const states: State[] = [ {...this.initialState}, ];
 
@@ -36,6 +41,26 @@ class StateRecorder implements IStateRecorder {
         return states;
     }
 
+    /**
+     * Add a new state to the state chain.
+     *
+     * @param state
+     */
+    public add(state: State): number {
+        const previousState = this.composeState(this.stateDifferences.length - 1);
+        const differenceEngine = new StateDifferenceEngine(previousState, state);
+        const difference = differenceEngine.difference();
+        this.stateDifferences.push(difference);
+        this.stateCursor = this.stateDifferences.length - 1;
+
+        return this.stateCursor;
+    }
+
+    /**
+     * Get the current StateSituation.
+     *
+     * @returns StateSituation
+     */
     public current(): StateSituation {
         const cursor = this.stateCursor;
         return {
@@ -46,20 +71,12 @@ class StateRecorder implements IStateRecorder {
         };
     }
 
-    public add(state: State): number {
-        // instead of storing the states as is
-        // to store only the differences between the current, new state
-        // and the old state
-
-        const previousState = this.composeState(this.stateDifferences.length - 1);
-        const differenceEngine = new StateDifferenceEngine(previousState, state);
-
-        this.stateDifferences.push(differenceEngine.difference());
-        this.stateCursor = this.stateDifferences.length - 1;
-
-        return this.stateCursor;
-    }
-
+    /**
+     * Get the previous StateSituation, if it exists,
+     * or the first StateSituation.
+     *
+     * @returns StateSituation
+     */
     public previous(): StateSituation {
         this.decreaseStateCursor();
         const cursor = this.stateCursor;
@@ -71,6 +88,12 @@ class StateRecorder implements IStateRecorder {
         };
     }
 
+    /**
+     * Get the next StateSituation, if it exists,
+     * or the last StateSituation.
+     *
+     * @returns StateSituation
+     */
     public next(): StateSituation {
         this.increaseStateCursor();
         const cursor = this.stateCursor;
@@ -82,9 +105,16 @@ class StateRecorder implements IStateRecorder {
         };
     }
 
+    /**
+     * Get an array of state differences to be stored
+     * in a persistent storage system.
+     *
+     * @returns StateDifference[]
+     */
     public differences(): StateDifference[] {
         return this.stateDifferences;
     }
+
 
     private decreaseStateCursor() {
         if (this.stateCursor - 1 >= 0) {
