@@ -4,27 +4,38 @@ import {
     StateSituation,
 } from '../../interfaces';
 
+import StateDifferenceEngine from '../StateDifferenceEngine';
+
 
 
 class StateRecorder implements IStateRecorder {
-    private states: State[] = [];
+    private initialState: State;
+    private stateDifferences: any[] = [];
     private stateCursor: number = 0;
 
     constructor(state: State) {
-        this.states.push(state);
+        this.initialState = state;
+        this.stateDifferences.push(state);
     }
 
     public getStates(): State[] {
-        return this.states;
+        const states: State[] = [ {...this.initialState}, ];
+
+        for (let i = 1; i < this.stateDifferences.length; i++) {
+            const state = this.composeState(i);
+            states.push(state);
+        }
+
+        return states;
     }
 
     public getCurrentState(): StateSituation {
         const cursor = this.stateCursor;
         return {
-            state: this.states[cursor],
+            state: this.composeState(cursor),
             cursor,
             first: cursor === 0,
-            last: cursor === this.states.length - 1,
+            last: cursor === this.stateDifferences.length - 1,
         };
     }
 
@@ -33,8 +44,11 @@ class StateRecorder implements IStateRecorder {
         // to store only the differences between the current, new state
         // and the old state
 
-        this.states.push(state);
-        this.stateCursor = this.states.length - 1;
+        const previousState = this.composeState(this.stateDifferences.length - 1);
+        const differenceEngine = new StateDifferenceEngine(previousState, state);
+
+        this.stateDifferences.push(differenceEngine.difference());
+        this.stateCursor = this.stateDifferences.length - 1;
 
         return this.stateCursor;
     }
@@ -43,10 +57,10 @@ class StateRecorder implements IStateRecorder {
         this.decreasestateCursor();
         const cursor = this.stateCursor;
         return {
-            state: this.states[cursor],
+            state: this.composeState(cursor),
             cursor,
             first: cursor === 0,
-            last: cursor === this.states.length - 1,
+            last: cursor === this.stateDifferences.length - 1,
         };
     }
 
@@ -54,10 +68,10 @@ class StateRecorder implements IStateRecorder {
         this.increasestateCursor();
         const cursor = this.stateCursor;
         return {
-            state: this.states[cursor],
+            state: this.composeState(cursor),
             cursor,
             first: cursor === 0,
-            last: cursor === this.states.length - 1,
+            last: cursor === this.stateDifferences.length - 1,
         };
     }
 
@@ -70,11 +84,25 @@ class StateRecorder implements IStateRecorder {
     }
 
     private increasestateCursor() {
-        if (this.stateCursor + 1 <= this.states.length - 1) {
+        if (this.stateCursor + 1 <= this.stateDifferences.length - 1) {
             this.stateCursor += 1;
         } else {
-            this.stateCursor = this.states.length - 1;
+            this.stateCursor = this.stateDifferences.length - 1;
         }
+    }
+
+    private composeState(cursor: number) {
+        // create a given state based on it's cursor
+        // and the initial state
+        let state = { ...this.initialState };
+
+        for (const [index, difference] of this.stateDifferences.entries()) {
+            if (index <= cursor) {
+                state = { ...difference };
+            }
+        }
+
+        return state;
     }
 }
 

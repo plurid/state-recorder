@@ -47,16 +47,4 @@ describe('StateRecorder', () => {
         const nextState1 = stateRecorder.nextState();
         expect(nextState1.state).toStrictEqual(state2);
     });
-
-    it('handles only the state differences', () => {
-        const state1 = {
-            action1: 'foo',
-            action2: 'bar',
-        };
-
-        const state2 = {
-            action1: 'foo',
-            action2: 'baz',
-        };
-    });
 });
