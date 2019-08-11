@@ -1,0 +1,1 @@
++ an issue with StateDifferenceEngine making the difference between states when the previous state deletes a property that the current one has, although one probably would never delete a key from the state object
