@@ -49,7 +49,7 @@ or
     // e.g. [initialState, newState];
 
     stateRecorder.current();
-    // returns a state situation
+    // returns a StateSituation
     // e.g.
     // {
     //      state, // the state
@@ -59,10 +59,10 @@ or
     // }
 
     stateRecorder.previous();
-    // returns the previous state situation
+    // returns the previous StateSituation
 
     stateRecorder.next();
-    // returns the next state situation
+    // returns the next StateSituation
 
     const differences = stateRecorder.differences();
     // returns an array of differences between the states
