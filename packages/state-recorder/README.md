@@ -87,9 +87,9 @@ or
     // due to an action of moving back/forward on the chain through previous()/next() methods
     // a playMode is automatically activated
 
-    // during the playMode new states cannot/will not be added onto the state chain with the add() method
+    // during playMode new states cannot/will not be added onto the state chain with the add() method
 
-    // to exit playMode:
+    // to set playMode off:
     // 1. the cursor must be placed on the last state of the state chain through succesive next() methods
     // 2. the stateRecorder must be resetted
     stateRecorder.reset();
