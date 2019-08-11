@@ -100,4 +100,4 @@ or
     stateRecorder.reset();
     // - the stateRecorder is branched
     stateRecorder.branch();
-    //    effectively discarding all the states on the state chain from the current position of the state cursor
+    //   effectively discarding all the states on the state chain from the current position of the state cursor
