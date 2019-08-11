@@ -39,6 +39,10 @@ describe('StateRecorder', () => {
         expect(previousState1.state).toStrictEqual(state1);
         expect(previousState1.first).toBe(true);
 
+        const previousState0 = stateRecorder.previousState();
+        expect(previousState0.state).toStrictEqual(state1);
+        expect(previousState0.first).toBe(true);
+
         const nextState1 = stateRecorder.nextState();
         expect(nextState1.state).toStrictEqual(state2);
     });
