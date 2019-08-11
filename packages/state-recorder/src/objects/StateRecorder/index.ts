@@ -11,17 +11,18 @@ import StateDifferenceEngine from '../StateDifferenceEngine';
 
 class StateRecorder implements IStateRecorder {
     private initialState: State;
-    private stateDifferences: any[] = [];
+    private playMode: boolean = false;
     private stateCursor: number = 0;
+    private stateDifferences: any[] = [];
 
-    constructor(state?: State | any[] | {}) {
-        if (!Array.isArray(state)) {
-            this.initialState = state || {};
+    constructor(initialState?: State | any[] | {}) {
+        if (!Array.isArray(initialState)) {
+            this.initialState = initialState || {};
             this.stateDifferences.push(this.initialState);
         } else {
-            this.initialState = state[0];
-            this.stateDifferences = state;
-            this.stateCursor = state.length - 1;
+            this.initialState = initialState[0];
+            this.stateDifferences = initialState;
+            this.stateCursor = initialState.length - 1;
         }
     }
 
@@ -47,13 +48,17 @@ class StateRecorder implements IStateRecorder {
      * @param state
      */
     public add(state: State): number {
-        const previousState = this.composeState(this.stateDifferences.length - 1);
-        const differenceEngine = new StateDifferenceEngine(previousState, state);
-        const difference = differenceEngine.difference();
-        this.stateDifferences.push(difference);
-        this.stateCursor = this.stateDifferences.length - 1;
+        if (!this.playMode) {
+            const previousState = this.composeState(this.stateDifferences.length - 1);
+            const differenceEngine = new StateDifferenceEngine(previousState, state);
+            const difference = differenceEngine.difference();
+            this.stateDifferences.push(difference);
+            this.stateCursor = this.stateDifferences.length - 1;
 
-        return this.stateCursor;
+            return this.stateCursor;
+        }
+
+        return -1;
     }
 
     /**
@@ -78,6 +83,7 @@ class StateRecorder implements IStateRecorder {
      * @returns StateSituation
      */
     public previous(): StateSituation {
+        this.playMode = false;
         this.decreaseStateCursor();
         const cursor = this.stateCursor;
         return {
@@ -116,8 +122,29 @@ class StateRecorder implements IStateRecorder {
         return this.stateDifferences;
     }
 
+    /**
+     * Obliterates current state chain and state differences
+     * and sets cursor to 0.
+     */
+    public reset(initialState?: State | {}): boolean {
+        this.initialState = initialState || {};
+        this.stateDifferences = [];
+        this.stateCursor = 0;
+        this.playMode = false;
+        return true;
+    }
+
+    /**
+     * Discards all the state chain after the cursor of the current state.
+     */
+    public branch(): boolean {
+        this.stateDifferences = this.stateDifferences.slice(0, this.stateCursor + 1);
+        return true;
+    }
+
 
     private decreaseStateCursor() {
+        this.playMode = true;
         if (this.stateCursor - 1 >= 0) {
             this.stateCursor -= 1;
         } else {
@@ -127,9 +154,11 @@ class StateRecorder implements IStateRecorder {
 
     private increaseStateCursor() {
         if (this.stateCursor + 1 <= this.stateDifferences.length - 1) {
+            this.playMode = true;
             this.stateCursor += 1;
         } else {
             this.stateCursor = this.stateDifferences.length - 1;
+            this.playMode = false;
         }
     }
 

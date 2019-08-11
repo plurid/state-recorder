@@ -22,6 +22,8 @@ export interface IStateRecorder {
     previous: () => StateSituation;
     next: () => StateSituation;
     differences: () => StateDifference[];
+    reset: (initialState?: State | {}) => boolean;
+    branch: () => boolean;
 }
 
 
