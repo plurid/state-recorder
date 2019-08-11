@@ -11,7 +11,7 @@ xdescribe('StateRecorder sanity test', () => {
     });
 
     it('StateRecorder is instantiable', () => {
-        expect(new StateRecorder('state'))
+        expect(new StateRecorder({ foo: 'bar'}))
             .toBeInstanceOf(StateRecorder);
     });
 });
