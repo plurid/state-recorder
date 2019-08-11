@@ -48,3 +48,12 @@ or
 
     stateRecorder.next();
     // returns the next state situation
+
+    const differences = stateRecorder.differences();
+    // returns an array of differences between the states
+    // with the first element, differences[0], the initial state
+    // to be further stored in persistent storage
+
+    // the differences can be loaded into a new StateRecorder
+    // to obtain a previous state chain, a sitting
+    const previousSitting = new StateRecorder(differences);
