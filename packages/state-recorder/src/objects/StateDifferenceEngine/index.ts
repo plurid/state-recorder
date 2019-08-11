@@ -19,15 +19,17 @@ class StateDifferenceEngine implements IStateDifferenceEngine {
         this.currentState = currentState;
     }
 
+    /**
+     * For all the keys in currentState
+     * check if values are different in the previousState
+     * and add the differences to stateDifferences
+     *
+     * @returns StateDifference
+     */
     public difference(): StateDifference {
-        // for all the keys in previousState
-        // check if values are different in the currentState
-        // add the differences to stateDifferences
-        // return stateDifference
-
         const stateDifference: any = {};
 
-        for (const key in this.previousState) {
+        for (const key in this.currentState) {
             const previousItem = this.previousState[key];
             const currentItem = this.currentState[key];
 
