@@ -2,7 +2,7 @@ import {
     IStateDifferenceEngine,
     State,
     StateDifference,
-} from '../../interfaces';
+} from '../../data/interfaces';
 
 import {
     isEqual

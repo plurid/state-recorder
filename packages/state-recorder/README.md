@@ -1,6 +1,7 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/plurid/state-recorder/master/about/identity/state-recorder-logo.png" height="200px">
     <br />
+    <br />
     <a target="_blank" href="https://www.npmjs.com/package/@plurid/state-recorder">
         <img src="https://img.shields.io/npm/v/@plurid/state-recorder.svg?logo=npm&colorB=940c0c&style=for-the-badge" alt="Version">
     </a>
@@ -14,6 +15,11 @@
 <h1 align="center">
     State Recorder
 </h1>
+
+
+
+<br />
+
 
 
 Record the state of an application and play it back/forward.

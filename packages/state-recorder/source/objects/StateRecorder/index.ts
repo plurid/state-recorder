@@ -3,7 +3,7 @@ import {
     State,
     StateSituation,
     StateDifference,
-} from '../../interfaces';
+} from '../../data/interfaces';
 
 import StateDifferenceEngine from '../StateDifferenceEngine';
 

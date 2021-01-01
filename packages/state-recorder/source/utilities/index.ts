@@ -4,7 +4,10 @@
  * @param item1
  * @param item2
  */
-const compare = (item1: any, item2: any) => {
+const compare = (
+    item1: any,
+    item2: any,
+) => {
     // Get the object type
     var itemType = Object.prototype.toString.call(item1);
 
@@ -26,6 +29,8 @@ const compare = (item1: any, item2: any) => {
             if (item1 !== item2) return false;
         }
     }
+
+    return;
 };
 
 
@@ -37,7 +42,10 @@ const compare = (item1: any, item2: any) => {
  * @param value
  * @param other
  */
-export const isEqual = (value: any, other: any) => {
+export const isEqual = (
+    value: any,
+    other: any,
+) => {
 	// Get the value type
 	var type = Object.prototype.toString.call(value);
 
