@@ -43,15 +43,15 @@
         "prepublishOnly": "yarn build"
     },
     "devDependencies": {
-        "@types/jest": "^29.1.0",
+        "@types/jest": "^29.1.1",
         "@types/node": "^18.7.23",
         "@typescript-eslint/eslint-plugin": "^5.38.1",
         "@typescript-eslint/parser": "^5.38.1",
         "cross-fetch": "^3.1.5",
         "eslint": "^8.24.0",
         "graphql": "^16.6.0",
-        "jest": "^29.1.1",
-        "jest-config": "^29.1.1",
+        "jest": "^29.1.2",
+        "jest-config": "^29.1.2",
         "rollup": "^2.79.1",
         "rollup-plugin-replace": "^2.2.0",
         "rollup-plugin-typescript2": "^0.34.0",
